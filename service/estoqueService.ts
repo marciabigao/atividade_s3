@@ -1,11 +1,11 @@
 import readCSV from "/home/mbigao/projetos/Treinee/atividade_s3/model/readCSV.ts";
 import writeCSV from "/home/mbigao/projetos/Treinee/atividade_s3/model/writeCSV.ts";
 import { Data } from "/home/mbigao/projetos/Treinee/atividade_s3/model/interface_data.ts";
-import fs from 'fs';
+import fs, { write } from 'fs';
 
 const filePath = '/home/mbigao/projetos/Treinee/atividade_s3/database/estoque.csv';
 
-class estoqueService
+export class estoqueService
 {
     async criar(data: Data)
     {
@@ -33,5 +33,23 @@ class estoqueService
                 await writeCSV(filePath, [data]);
             }
         }
+    };
+
+    async remover(identificador: string) 
+    {
+        var arquivoCompleto = await readCSV(filePath);
+        var idRemoção: number = 0;
+
+        for(var i = 0; i < arquivoCompleto.length; i++)
+        {
+            if(arquivoCompleto[i][1] == identificador)
+                {
+                    idRemoção = i;
+                }
+        }
+
+        arquivoCompleto.splice(idRemoção, 1);
+
+        await writeCSV(filePath, arquivoCompleto);
     }
 }
