@@ -42,7 +42,7 @@ export class estoqueService
 
         for(var i = 0; i < arquivoCompleto.length; i++)
         {
-            if(arquivoCompleto[i][1] == identificador)
+            if(arquivoCompleto[i][0] == identificador)
                 {
                     idRemoção = i;
                 }
