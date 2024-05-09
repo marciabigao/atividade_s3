@@ -5,7 +5,7 @@ import fs, { write } from 'fs';
 
 const filePath = '/home/mbigao/projetos/Treinee/atividade_s3/database/estoque.csv';
 
-export class estoqueService
+export default new class estoqueService
 {
     async criar(data: Data)
     {
@@ -53,3 +53,4 @@ export class estoqueService
         await writeCSV(filePath, arquivoCompleto);
     }
 }
+

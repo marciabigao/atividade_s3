@@ -1,5 +1,5 @@
 import {Data} from '/home/mbigao/projetos/Treinee/atividade_s3/model/interface_data.ts';
-import {estoqueService} from '/home/mbigao/projetos/Treinee/atividade_s3/service/estoqueService.ts';
+import estoqueService from '/home/mbigao/projetos/Treinee/atividade_s3/service/estoqueService.ts';
 
 export async function adicionarProduto(data:Data) 
 {
