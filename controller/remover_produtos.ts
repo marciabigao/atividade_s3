@@ -32,6 +32,7 @@ export async function removerProdutos(identificador: string)
     if(resposta == 'y')
     {
         await estoqueService.remover(identificador);
+        console.log("Seu produto foi removido com sucesso.")
     }
     
 }

@@ -2,6 +2,7 @@ const scan = require('prompt-sync')({sigint: true});
 
 import { Data } from "./model/interface_data";
 import {adicionarProduto} from "/home/mbigao/projetos/Treinee/atividade_s3/controller/adicionar_produto.ts";
+import { removerProdutos } from "./controller/remover_produtos";
 
 var entrada = scan("Digite a ação desejada:");
 var W = parseInt(entrada, 10);
@@ -25,5 +26,8 @@ switch(W)
         await adicionarProduto(dados);
         break;
 
-
+    case(2):
+        
+        var identificador = scan("Digite o item a ser removido do estoque: ")
+        await removerProdutos(identificador);
 }
