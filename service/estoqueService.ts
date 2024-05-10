@@ -79,6 +79,23 @@ export default new class estoqueService
 
         return totalGlobal;
     }
+
+    async pesoTotal() 
+    {
+        const arquivoCompleto = await readCSV(filePath);
+        var data: Data;
+        var totalItem: number;
+        var totalGlobal: number = 0;
+
+        for(var linha of arquivoCompleto)
+        {
+            data = linha;
+            totalItem = data.peso * data.quantidade;
+            totalGlobal += totalItem;
+        }
+
+        return totalGlobal;
+    }
 }
 
 
