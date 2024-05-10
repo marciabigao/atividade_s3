@@ -26,10 +26,15 @@ prompt += "Digite 0 para voltar ao item anterior";
 
 var entrada = scan(prompt)
 
-var W: number = 0;
+var W: number = 2;
 
 if(entrada == 0)
-    W = W - 1;
+{
+    if(W == 1)
+        throw new Error("Você já está no primeiro comando.");
+    else
+        W = W - 1;
+}
 
 W = parseInt(entrada, 10);
 
