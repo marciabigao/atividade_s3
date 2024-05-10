@@ -52,5 +52,17 @@ export default new class estoqueService
 
         await writeCSV(filePath, arquivoCompleto);
     }
+
+    async listar() 
+    {
+        const arquivoCompleto = await readCSV(filePath);
+
+        for(var i = 1; i < arquivoCompleto.length; i++)
+        {
+            console.log(arquivoCompleto[i][0] + ' ' + arquivoCompleto[i][1] + ' ' + arquivoCompleto[i][2] + ' ' + arquivoCompleto[i][3] );
+        }
+    }
 }
+
+
 
