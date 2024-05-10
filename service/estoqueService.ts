@@ -62,6 +62,23 @@ export default new class estoqueService
             console.log(arquivoCompleto[i][0] + ' ' + arquivoCompleto[i][1] + ' ' + arquivoCompleto[i][2] + ' ' + arquivoCompleto[i][3] );
         }
     }
+
+    async valorTotal() 
+    {
+        const arquivoCompleto = await readCSV(filePath);
+        var data: Data;
+        var totalItem: number;
+        var totalGlobal: number = 0;
+
+        for(var linha of arquivoCompleto)
+        {
+            data = linha;
+            totalItem = data.valor * data.quantidade;
+            totalGlobal += totalItem;
+        }
+
+        return totalGlobal;
+    }
 }
 
 
