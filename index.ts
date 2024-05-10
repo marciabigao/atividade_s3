@@ -8,6 +8,7 @@ import { calcularValorTotal } from "./controller/calcular_valor_total";
 import { calcularPesoTotal } from "./controller/calcular_peso_total";
 import { calcularMediaValores } from "./controller/calcular_media_valores";
 import { calcularMediaPesos } from "./controller/calcular_media_pesos";
+import { totalItens } from "./controller/total_itens";
 
 var prompt: string = "Digite a ação desejada:";
 prompt += "Digite 1 para adicionar item ao estoque";
@@ -17,6 +18,7 @@ prompt += "Digite 4 para calcular o valor total do estoque";
 prompt += "Digite 5 para calcular o peso total do estoque";
 prompt += "Digite 6 para calcular a média dos valores do estoque";
 prompt += "Digite 7 para calcular a média dos pesos do estoque";
+prompt += "Digite 8 para saber o total de itens no estoque";
 prompt += "Digite 0 para voltar ao item anterior";
 
 
@@ -69,6 +71,12 @@ switch(W)
     case(7):
 
         await calcularMediaPesos();
+
+    case(8):
+
+        await totalItens();
+
+        
 
 
         

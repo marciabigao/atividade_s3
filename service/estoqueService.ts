@@ -130,6 +130,21 @@ export default new class estoqueService
 
        return somaGlobal / totalItens;
     }
+
+    async totalItens() 
+    {
+        const arquivoCompleto = await readCSV(filePath);
+        var somaItens = 0;
+
+        for(var linha of arquivoCompleto)
+        {
+            somaItens += linha.quantidade;
+        }
+
+        return somaItens;
+    }
+
+    
 }
 
 
