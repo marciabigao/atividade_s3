@@ -5,5 +5,5 @@ import readCSV from "../model/readCSV";
 export async function calcularValorTotal() 
 {
     const valorTotal = await estoqueService.valorTotal();
-    console.log("O valor total do seu estoque é " + valorTotal + ".");
+    console.log("O valor total do seu estoque é R$" + valorTotal + ".");
 }
