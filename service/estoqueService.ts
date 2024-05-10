@@ -97,7 +97,7 @@ export default new class estoqueService
         return totalGlobal;
     }
 
-    async media() 
+    async mediaValores() 
     {
        const arquivoCompleto = await readCSV(filePath);
        
@@ -109,6 +109,23 @@ export default new class estoqueService
        {
             data = lista;
             somaGlobal += data.valor * data.quantidade;
+       }
+
+       return somaGlobal / totalItens;
+    }
+
+    async mediaPesos() 
+    {
+       const arquivoCompleto = await readCSV(filePath);
+       
+       var data: Data;
+       var somaGlobal = 0;
+       var totalItens = arquivoCompleto.length - 1;
+
+       for(var lista of arquivoCompleto)
+       {
+            data = lista;
+            somaGlobal += data.peso * data.quantidade;
        }
 
        return somaGlobal / totalItens;
