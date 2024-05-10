@@ -21,7 +21,7 @@ export async function removerProdutos(identificador: string)
 
     if(!(estaNoArquivo))
     {
-        console.log("O item em questão não se encontra no estoque.");
+        throw new Error("O item em questão não se encontra no estoque.");
     }
     
     console.log("Você realmente deseja remover o seguinte produto?");
