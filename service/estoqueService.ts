@@ -144,7 +144,24 @@ export default new class estoqueService
         return somaItens;
     }
 
-    
+    async totalProdutos() 
+    {
+        const arquivoCompleto = await readCSV(filePath);
+        var total = 0;
+        
+        for(var linha of arquivoCompleto)
+        {
+            var produtoAtual = linha.nome;
+            total++;
+
+            for(var linha of arquivoCompleto)
+            {
+                arquivoCompleto.filter((linha) => linha.nome == produtoAtual);
+            }
+        }
+
+        return total;
+    }
 }
 
 

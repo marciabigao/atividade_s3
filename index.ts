@@ -9,6 +9,7 @@ import { calcularPesoTotal } from "./controller/calcular_peso_total";
 import { calcularMediaValores } from "./controller/calcular_media_valores";
 import { calcularMediaPesos } from "./controller/calcular_media_pesos";
 import { totalItens } from "./controller/total_itens";
+import { totalProdutos } from "./controller/total_produtos";
 
 var prompt: string = "Digite a ação desejada:";
 prompt += "Digite 1 para adicionar item ao estoque";
@@ -19,14 +20,18 @@ prompt += "Digite 5 para calcular o peso total do estoque";
 prompt += "Digite 6 para calcular a média dos valores do estoque";
 prompt += "Digite 7 para calcular a média dos pesos do estoque";
 prompt += "Digite 8 para saber o total de itens no estoque";
+prompt += "Digite 9 para saber o total de produtos no estoque";
 prompt += "Digite 0 para voltar ao item anterior";
 
 
-var entrada = scan(prompt);
-var W = parseInt(entrada, 10);
+var entrada = scan(prompt)
+
+var W: number = 0;
 
 if(entrada == 0)
     W = W - 1;
+
+W = parseInt(entrada, 10);
 
 switch(W)
 {
@@ -51,34 +56,41 @@ switch(W)
         
         var identificador = scan("Digite o item a ser removido do estoque: ")
         await removerProdutos(identificador);
+        break;
 
     case(3):
 
         await listarProdutos();
+        break;
 
     case(4):
 
         await calcularValorTotal();
+        break;
 
     case(5):
 
         await calcularPesoTotal();
+        break;
 
     case(6):
         
         await calcularMediaValores();
+        break;
 
     case(7):
 
         await calcularMediaPesos();
+        break;
 
     case(8):
 
         await totalItens();
+        break;
+    
+    case(9):
 
-        
-
-
-        
+        await totalProdutos();
+        break;   
         
 }
