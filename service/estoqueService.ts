@@ -1,9 +1,9 @@
-import readCSV from "/home/mbigao/projetos/Treinee/atividade_s3/model/readCSV.ts";
-import writeCSV from "/home/mbigao/projetos/Treinee/atividade_s3/model/writeCSV.ts";
-import { Data } from "/home/mbigao/projetos/Treinee/atividade_s3/model/interface_data.ts";
+import readCSV from "../model/readCSV";
+import writeCSV from "../model/writeCSV";
+import { Data } from "../model/interface_data";
 import fs, { write } from 'fs';
 
-const filePath = '/home/mbigao/projetos/Treinee/atividade_s3/database/estoque.csv';
+const filePath = "../database/estoque.csv";
 
 export default new class estoqueService
 {

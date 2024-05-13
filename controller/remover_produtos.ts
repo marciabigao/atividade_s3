@@ -2,7 +2,7 @@ import readCSV from "../model/readCSV";
 import estoqueService  from "../service/estoqueService";
 const scan = require('prompt-sync')({sigint: true});
 
-const filePath = '/home/mbigao/projetos/Treinee/atividade_s3/database/estoque.csv'
+const filePath = "../database/estoque.csv";
 
 export async function removerProdutos(identificador: string) 
 {

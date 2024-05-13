@@ -1,7 +1,7 @@
 const scan = require('prompt-sync')({sigint: true});
 
 import { Data } from "./model/interface_data";
-import {adicionarProduto} from "/home/mbigao/projetos/Treinee/atividade_s3/controller/adicionar_produto.ts";
+import { adicionarProduto } from "./controller/adicionar_produto";
 import { removerProdutos } from "./controller/remover_produtos";
 import { listarProdutos } from "./controller/listar_produtos";
 import { calcularValorTotal } from "./controller/calcular_valor_total";
