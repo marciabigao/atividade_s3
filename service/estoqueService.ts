@@ -67,13 +67,12 @@ export default new class estoqueService
     {
         const arquivoCompleto = await readCSV(filePath);
 
-
         function valorTotalArray(acumulador, valorAtual)
         {
-            return acumulador + (valorAtual.valor * valorAtual.quantidade) 
+            return acumulador + (valorAtual.valor * valorAtual.quantidade); 
         }
 
-        var totalGlobal = arquivoCompleto.reduce(valorTotalArray, 0);
+        var totalGlobal = arquivoCompleto.reduce(valorTotalArray);
 
         return totalGlobal;
     }
@@ -81,16 +80,13 @@ export default new class estoqueService
     async pesoTotal() 
     {
         const arquivoCompleto = await readCSV(filePath);
-        var data: Data;
-        var totalItem: number;
-        var totalGlobal: number = 0;
-
-        for(var linha of arquivoCompleto)
+        
+        function pesoTotalArray(acumulador, valorAtual)
         {
-            data = linha;
-            totalItem = data.peso * data.quantidade;
-            totalGlobal += totalItem;
+            return acumulador + (valorAtual.peso * valorAtual.quantidade);
         }
+
+        var totalGlobal = arquivoCompleto.reduce(pesoTotalArray);
 
         return totalGlobal;
     }
