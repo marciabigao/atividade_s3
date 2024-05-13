@@ -71,8 +71,14 @@ export default new class estoqueService
         var totalGlobal: number = 0;
 
         for(var linha of arquivoCompleto)
-        {
+        {   
             data = linha;
+
+            if (isNaN(data.valor) || isNaN(data.quantidade)) 
+            {
+                console.error("Erro: ", data.valor, data.quantidade);
+            }
+
             totalItem = data.valor * data.quantidade;
             totalGlobal += totalItem;
         }
