@@ -3,7 +3,7 @@ import writeCSV from "../model/writeCSV";
 import { Data } from "../model/interface_data";
 import fs, { write } from 'fs';
 
-const filePath = "../database/estoque.csv";
+const filePath = "database/estoque.csv";
 
 export default new class estoqueService
 {
@@ -66,22 +66,14 @@ export default new class estoqueService
     async valorTotal() 
     {
         const arquivoCompleto = await readCSV(filePath);
-        var data: Data;
-        var totalItem: number;
-        var totalGlobal: number = 0;
 
-        for(var linha of arquivoCompleto)
-        {   
-            data = linha;
 
-            if (isNaN(data.valor) || isNaN(data.quantidade)) 
-            {
-                console.error("Erro: ", data.valor, data.quantidade);
-            }
-
-            totalItem = data.valor * data.quantidade;
-            totalGlobal += totalItem;
+        function valorTotalArray(acumulador, valorAtual)
+        {
+            return acumulador + (valorAtual.valor * valorAtual.quantidade) 
         }
+
+        var totalGlobal = arquivoCompleto.reduce(valorTotalArray, 0);
 
         return totalGlobal;
     }
