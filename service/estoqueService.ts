@@ -67,12 +67,12 @@ export default new class estoqueService
     {
         const arquivoCompleto = await readCSV(filePath);
 
-        function valorTotalArray(acumulador, valorAtual)
+        function valorTotalArray(acumulador = 0, valorAtual)
         {
             return acumulador + (valorAtual.valor * valorAtual.quantidade); 
         }
 
-        var totalGlobal = arquivoCompleto.reduce(valorTotalArray);
+        var totalGlobal = arquivoCompleto.reduce(valorTotalArray, 0);
 
         return totalGlobal;
     }
@@ -81,12 +81,12 @@ export default new class estoqueService
     {
         const arquivoCompleto = await readCSV(filePath);
         
-        function pesoTotalArray(acumulador, valorAtual)
+        function pesoTotalArray(acumulador = 0, valorAtual)
         {
             return acumulador + (valorAtual.peso * valorAtual.quantidade);
         }
 
-        var totalGlobal = arquivoCompleto.reduce(pesoTotalArray);
+        var totalGlobal = arquivoCompleto.reduce(pesoTotalArray, 0);
 
         return totalGlobal;
     }
@@ -94,16 +94,26 @@ export default new class estoqueService
     async mediaValores() 
     {
        const arquivoCompleto = await readCSV(filePath);
-       
-       var data: Data;
-       var somaGlobal = 0;
-       var totalItens = arquivoCompleto.length - 1;
 
-       for(var lista of arquivoCompleto)
+       function calcularSomaValores(acumulador = 0, valorAtual)
        {
-            data = lista;
-            somaGlobal += data.valor * data.quantidade;
+            return acumulador + (valorAtual.valor * valorAtual.quantidade); 
        }
+
+       function calcularSomaQuantidades(acumulador = 0, valorAtual)
+       {
+            acumulador += valorAtual.quantidade;
+            return acumulador;
+       }
+       
+       var totalItens = arquivoCompleto.reduce(calcularSomaQuantidades, 0);
+
+       if(typeof totalItens == 'undefined')
+            throw new Error("Não foi possível efetuar essa divisão");
+
+       var somaGlobal = arquivoCompleto.reduce(calcularSomaValores, 0);
+
+       console.log(somaGlobal, totalItens);
 
        return somaGlobal / totalItens;
     }
@@ -114,12 +124,13 @@ export default new class estoqueService
        
        var data: Data;
        var somaGlobal = 0;
-       var totalItens = arquivoCompleto.length - 1;
+       var totalItens = 0;
 
        for(var lista of arquivoCompleto)
        {
             data = lista;
             somaGlobal += data.peso * data.quantidade;
+            totalItens += data.quantidade;
        }
 
        return somaGlobal / totalItens;
