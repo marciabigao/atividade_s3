@@ -38,17 +38,17 @@ export default new class estoqueService
     async remover(identificador: string) 
     {
         var arquivoCompleto = await readCSV(filePath);
-        var idRemoção: number = 0;
+        var idRemoção = 0;
 
-        for(var i = 0; i < arquivoCompleto.length; i++)
+        for(var linha of arquivoCompleto)
         {
-            if(arquivoCompleto[i][0] == identificador)
+            idRemoção++;
+
+            if(linha.nome == identificador)
                 {
-                    idRemoção = i;
+                    arquivoCompleto.splice(idRemoção, 1);
                 }
         }
-
-        arquivoCompleto.splice(idRemoção, 1);
 
         await writeCSV(filePath, arquivoCompleto);
     }
@@ -57,9 +57,9 @@ export default new class estoqueService
     {
         const arquivoCompleto = await readCSV(filePath);
 
-        for(var i = 1; i < arquivoCompleto.length; i++)
+        for(var linha of arquivoCompleto)
         {
-            console.log(arquivoCompleto[i][0] + ' ' + arquivoCompleto[i][1] + ' ' + arquivoCompleto[i][2] + ' ' + arquivoCompleto[i][3] );
+            console.log(`Nome: ${linha.nome}, Valor: R$${linha.valor}, Peso: ${linha.peso} kg, Quantidade: ${linha.quantidade}`);
         }
     }
 
@@ -102,8 +102,7 @@ export default new class estoqueService
 
        function calcularSomaQuantidades(acumulador = 0, valorAtual)
        {
-            acumulador += valorAtual.quantidade;
-            return acumulador;
+            return acumulador + Number(valorAtual.quantidade);
        }
        
        var totalItens = arquivoCompleto.reduce(calcularSomaQuantidades, 0);
@@ -113,38 +112,43 @@ export default new class estoqueService
 
        var somaGlobal = arquivoCompleto.reduce(calcularSomaValores, 0);
 
-       console.log(somaGlobal, totalItens);
-
-       return somaGlobal / totalItens;
+       return (somaGlobal / totalItens).toFixed(2);
     }
 
     async mediaPesos() 
     {
        const arquivoCompleto = await readCSV(filePath);
        
-       var data: Data;
-       var somaGlobal = 0;
-       var totalItens = 0;
-
-       for(var lista of arquivoCompleto)
+       function calcularSomaPesos(acumulador = 0, valorAtual)
        {
-            data = lista;
-            somaGlobal += data.peso * data.quantidade;
-            totalItens += data.quantidade;
+            return acumulador + (valorAtual.peso * valorAtual.quantidade); 
        }
 
-       return somaGlobal / totalItens;
+       function calcularSomaQuantidades(acumulador = 0, valorAtual)
+       {
+            return acumulador + Number(valorAtual.quantidade);
+       }
+       
+       var totalItens = arquivoCompleto.reduce(calcularSomaQuantidades, 0);
+
+       if(typeof totalItens == 'undefined')
+            throw new Error("Não foi possível efetuar essa divisão");
+
+       var somaGlobal = arquivoCompleto.reduce(calcularSomaPesos, 0);
+
+       return (somaGlobal / totalItens).toFixed(2);
     }
 
     async totalItens() 
     {
         const arquivoCompleto = await readCSV(filePath);
-        var somaItens = 0;
 
-        for(var linha of arquivoCompleto)
+        function calcularTotalItens(acumulador = 0, valorAtual)
         {
-            somaItens += linha.quantidade;
+            return acumulador + Number(valorAtual.quantidade);
         }
+
+        var somaItens = arquivoCompleto.reduce(calcularTotalItens, 0);
 
         return somaItens;
     }
